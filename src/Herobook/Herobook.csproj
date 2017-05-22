@@ -173,7 +173,6 @@
     <Compile Include="App_Start\Routing\ContentTypeRoute.cs" />
     <Compile Include="App_Start\Routing\ContentTypeConstraint.cs" />
     <Compile Include="Controllers\Api\PhotosController.cs" />
-    <Compile Include="Controllers\Api\StatusController.cs" />
     <Compile Include="Controllers\Api\StatusesController.cs" />
     <Compile Include="App_Start\Hypermedia\Hal.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
