@@ -20,14 +20,8 @@ namespace Herobook.Controllers.Api {
 
         [Route("api/profiles/")]
         [HttpGet]
-        public object GetProfiles(int index = 0, int count = 10) {
-            var _links = Hal.Paginate(Request.RequestUri.AbsolutePath, index, count, db.CountProfiles());
-            var items = db.ListProfiles().Skip(index).Take(count);
-            var result = new {
-                _links,
-                items
-            };
-            return result;
+        public object GetProfiles() {
+            return db.ListProfiles();
         }
 
         [Route("api/profiles/{username}")]
