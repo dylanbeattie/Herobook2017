@@ -33,14 +33,7 @@ namespace Herobook.Controllers.Api {
         [Route("api/profiles/{username}")]
         [HttpGet]
         public object GetProfile(string username, string expand = null) {
-            var resource = db.FindProfile(username)?.ToResource();
-
-            if (resource != null && !string.IsNullOrEmpty(expand)) {
-                dynamic embedded = new ExpandoObject();
-                if (expand.Contains("friends")) embedded.friends = GetProfileFriends(username);
-                if (expand.Contains("photos")) embedded.photos = new PhotosController().GetProfilePhotos(username);
-                resource._embedded = embedded;
-            }
+            var resource = db.FindProfile(username);
             return (object)resource ?? NotFound();
         }
 
