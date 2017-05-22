@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -31,8 +32,16 @@ namespace Herobook.Controllers.Api {
 
         [Route("api/profiles/{username}")]
         [HttpGet]
-        public object GetProfile(string username) {
-            return (object)db.FindProfile(username)?.ToResource() ?? NotFound();
+        public object GetProfile(string username, string expand) {
+            var resource = db.FindProfile(username)?.ToResource();
+
+            if (resource != null && !string.IsNullOrEmpty(expand)) {
+                dynamic embedded = new ExpandoObject();
+                if (expand.Contains("friends")) embedded.friends = GetProfileFriends(username);
+                if (expand.Contains("photos")) embedded.photos = new PhotosController().GetProfilePhotos(username);
+                resource._embedded = embedded;
+            }
+            return (object)resource ?? NotFound();
         }
 
         [Route("api/profiles/{username}/friends")]
