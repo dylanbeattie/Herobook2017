@@ -75,12 +75,6 @@ namespace Herobook.Hypermedia {
                     method = "PUT",
                     type = "application/json"
                 },
-                upload = new {
-                    name = "Upload this photo",
-                    href,
-                    method = "PUT",
-                    type = "image/jpeg"
-                },
                 delete = new {
                     name = "Delete this photo",
                     href,
