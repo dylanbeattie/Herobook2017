@@ -22,18 +22,8 @@ namespace Herobook.Controllers.Api {
         public object GetProfiles(int index = 0, int count = 10) {
             var _links = Hal.Paginate(Request.RequestUri.AbsolutePath, index, count, db.CountProfiles());
             var items = db.ListProfiles().Skip(index).Take(count).Select(profile => profile.ToResource());
-            var _actions = new {
-                create = new {
-                    name = "Create a new profile",
-                    href = Request.RequestUri.AbsolutePath,
-                    method = "POST",
-                    type = "application/json",
-                    schema = new { href = "/schemas/profile.json" }
-                }
-            };
             var result = new {
                 _links,
-                _actions,
                 items
             };
             return result;

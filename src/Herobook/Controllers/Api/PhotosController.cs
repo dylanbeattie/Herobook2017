@@ -25,16 +25,7 @@ namespace Herobook.Controllers.Api {
         [HttpGet]
         public object GetProfilePhotos(string username) {
             var items = db.LoadPhotos(username).Select(s => s.ToResource());
-            var _actions = new {
-                create = new {
-                    name = "Add a new photo to this profile",
-                    href = Request.RequestUri.AbsolutePath,
-                    method = "POST",
-                    type = "application/json"
-                }
-            };
             var result = new {
-                _actions,
                 items
             };
             return result;

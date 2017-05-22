@@ -46,19 +46,6 @@ namespace Herobook.Hypermedia {
         public static dynamic ToResource(this Status status) {
             dynamic resource = status.ToDynamic();
             var href = $"/api/profiles/{status.Username}/statuses/{status.StatusId}";
-            resource._actions = new {
-                update = new {
-                    name = "Update this status",
-                    href,
-                    method = "PUT",
-                    type = "application/json"
-                },
-                delete = new {
-                    name = "Delete this status",
-                    href,
-                    method = "DELETE"
-                }
-            };
             return (resource);
         }
 
@@ -68,19 +55,7 @@ namespace Herobook.Hypermedia {
             resource._links = new {
                 self = Hal.Href(href)
             };
-            resource._actions = new {
-                update = new {
-                    name = "Update this photo",
-                    href = href,
-                    method = "PUT",
-                    type = "application/json"
-                },
-                delete = new {
-                    name = "Delete this photo",
-                    href,
-                    method = "DELETE"
-                }
-            };
+
             return (resource);
         }
 
@@ -92,19 +67,7 @@ namespace Herobook.Hypermedia {
                 statuses = Hal.Href($"/api/profiles/{profile.Username}/statuses"),
                 photos = Hal.Href($"/api/profiles/{profile.Username}/photos")
             };
-            resource._actions = new {
-                update = new {
-                    name = "Update this profile",
-                    href = $"/api/profiles/{profile.Username}",
-                    method = "PUT",
-                    type = "application/json"
-                },
-                delete = new {
-                    name = "Delete this profile",
-                    href = $"/api/profiles/{profile.Username}",
-                    method = "DELETE"
-                }
-            };
+
             return resource;
         }
     }
