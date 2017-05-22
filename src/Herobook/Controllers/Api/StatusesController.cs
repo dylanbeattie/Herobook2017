@@ -16,7 +16,7 @@ namespace Herobook.Controllers.Api {
         [Route("api/profiles/{username}/statuses")]
         [HttpGet]
         public object GetProfileStatuses(string username) {
-            return db.LoadStatuses(username).Select(s => s.ToResource());
+            return db.LoadStatuses(username);
         }
 
         [Route("api/profiles/{username}/statuses")]
@@ -24,13 +24,13 @@ namespace Herobook.Controllers.Api {
         public object PostProfileStatus(string username, [FromBody]Status status) {
             status.Username = username;
             status.PostedAt = DateTimeOffset.Now;
-            return db.CreateStatus(status).ToResource();
+            return db.CreateStatus(status);
         }
 
         [Route("api/profiles/{username}/statuses/{statusId}")]
         [HttpGet]
         public object GetProfileStatus(string username, Guid statusGuid) {
-            return db.LoadStatus(statusGuid).ToResource();
+            return db.LoadStatus(statusGuid);
         }
 
         [Route("api/profiles/{username}/statuses/{statusId}")]

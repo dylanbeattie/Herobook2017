@@ -22,7 +22,7 @@ namespace Herobook.Controllers.Api {
         [HttpGet]
         public object GetProfiles(int index = 0, int count = 10) {
             var _links = Hal.Paginate(Request.RequestUri.AbsolutePath, index, count, db.CountProfiles());
-            var items = db.ListProfiles().Skip(index).Take(count).Select(profile => profile.ToResource());
+            var items = db.ListProfiles().Skip(index).Take(count);
             var result = new {
                 _links,
                 items
@@ -33,7 +33,7 @@ namespace Herobook.Controllers.Api {
         [Route("api/profiles/{username}")]
         [HttpGet]
         public object GetProfile(string username, string expand = null) {
-            var resource = db.FindProfile(username).ToResource();
+            var resource = db.FindProfile(username);
             return (object)resource ?? NotFound();
         }
 
@@ -50,14 +50,14 @@ namespace Herobook.Controllers.Api {
             var existing = db.FindProfile(profile.Username);
             if (existing != null) return Request.CreateResponse(HttpStatusCode.Conflict, "That username is not available");
             db.CreateProfile(profile);
-            return Created(Url.Content($"~/api/profiles/{profile.Username}"), profile.ToResource());
+            return Created(Url.Content($"~/api/profiles/{profile.Username}"), profile);
         }
 
         [Route("api/profiles/{username}")]
         [HttpPut]
         public object Put(string username, [FromBody] Profile profile) {
             var result = db.UpdateProfile(username, profile);
-            return result.ToResource();
+            return result;
         }
 
 

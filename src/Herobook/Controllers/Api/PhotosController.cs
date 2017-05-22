@@ -24,11 +24,7 @@ namespace Herobook.Controllers.Api {
         [Route("api/profiles/{username}/photos")]
         [HttpGet]
         public object GetProfilePhotos(string username) {
-            var items = db.LoadPhotos(username).Select(s => s.ToResource());
-            var result = new {
-                items
-            };
-            return result;
+            return db.LoadPhotos(username);
         }
 
 
@@ -37,14 +33,14 @@ namespace Herobook.Controllers.Api {
         public object PostProfilePhoto(string username, [FromBody] Photo photo) {
             photo.Username = username;
             photo.PostedAt = DateTimeOffset.Now;
-            return db.CreatePhoto(photo).ToResource();
+            return db.CreatePhoto(photo);
         }
 
         [Route("api/profiles/{username}/photos/{photoId}")]
         [HttpGet]
         public object GetProfilePhoto(string username, Guid photoId) {
             var photo = db.LoadPhoto(photoId);
-            return photo.ToResource();
+            return photo;
         }
 
         [ContentTypeRoute("api/profiles/{username}/photos/{photoId}", "application/json")]

@@ -28,50 +28,6 @@ namespace Herobook.Hypermedia {
         }
     }
 
-    public static class EntityExtensions {
-        public static dynamic ToDynamic(this object value) {
-            IDictionary<string, object> expando = new ExpandoObject();
-            foreach (PropertyDescriptor property
-                in TypeDescriptor.GetProperties(value.GetType())) {
-                expando.Add(property.Name, property.GetValue(value));
-            }
-            return (ExpandoObject)expando;
-        }
-
-
-        public static IDictionary<string, object> ToDictionary(this object d) {
-            return d.GetType().GetProperties().ToDictionary(x => x.Name, x => x.GetValue(d, null));
-        }
-
-        public static dynamic ToResource(this Status status) {
-            dynamic resource = status.ToDynamic();
-            var href = $"/api/profiles/{status.Username}/statuses/{status.StatusId}";
-            return (resource);
-        }
-
-        public static dynamic ToResource(this Photo photo) {
-            dynamic resource = photo.ToDynamic();
-            var href = $"/api/profiles/{photo.Username}/photos/{photo.PhotoId}";
-            resource._links = new {
-                self = Hal.Href(href)
-            };
-
-            return (resource);
-        }
-
-        public static dynamic ToResource(this Profile profile) {
-            dynamic resource = profile.ToDynamic();
-            resource._links = new {
-                self = Hal.Href($"/api/profiles/{profile.Username}"),
-                friends = Hal.Href($"/api/profiles/{profile.Username}/friends"),
-                statuses = Hal.Href($"/api/profiles/{profile.Username}/statuses"),
-                photos = Hal.Href($"/api/profiles/{profile.Username}/photos")
-            };
-
-            return resource;
-        }
-    }
-
     /// <summary>
     ///     Turn the ImageCodecInfo Extension property, which looks like *.JPG;*.JPE*,*.JPEG, into a writable file
     ///     extension
