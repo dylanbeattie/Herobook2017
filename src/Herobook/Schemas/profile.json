@@ -1,0 +1,13 @@
+﻿{
+  "title": "Profile",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "required": ["username", "name"]
+}

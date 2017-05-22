@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Hyperion: Hypermedia API Explorer</title>
+    <script src="jQuery/jquery-3.1.1.min.js"></script>
+    <script src="jQuery/jquery-ui-1.12.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="jQueryUI/themes/explorer/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="explorer.css" />
+</head>
+<body>
+    <form id="explorer-form" action="#">
+        <fieldset id="explorer-fieldset">
+            <label for="server-input">Server:</label>
+            <input type="text" name="server" id="server-input" placeholder="host" value="http://localhost:5555" />
+            <label for="endpoint-input">Path:</label>
+            <input type="text" name="endpoint" id="endpoint-input" placeholder="endpoint" value="/api/" />
+
+            <label for="username-input">Username:</label>
+            <input type="text" name="username" id="username-input" placeholder="username" />
+            <label for="password-input">Password:</label>
+            <input type="text" name="password" id="password-input" placeholder="password" />
+            <input type="button" name="authenticate" id="authenticate-button" value="Update Authorization header" />
+
+            <label for="headers-textarea">Request Headers:</label>
+            <textarea name="headers" id="headers-textarea" placeholder="Name: value"></textarea>
+
+            <input type="submit" id="go-button" value="GET" />
+            <a href="#" id="reset-button">Reset</a><br />
+        </fieldset>
+    </form>
+    <div id="response-wrapper">
+        <div id="spinner">
+            <img alt="Loading..." src="ajaxload.gif" />
+        </div>
+        <pre id="json-data"></pre>
+    </div>
+    <script type="text/javascript" src="explorer.js"></script>
+</body>
+</html>

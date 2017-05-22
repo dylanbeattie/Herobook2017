@@ -1,0 +1,40 @@
+﻿@model dynamic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>REST Workshop</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/styles.css"/>
+</head>
+<body>
+<h1>Building Hypermedia APIs with ASP.NET</h1>
+<h2>Sela Developer Practise 2017</h2>
+<p>Hey there! Welcome to the sample API that we'll be using during today's workshop</p>
+<h2>What's Here?</h2>
+<p>
+    It's a very simple ASP.NET MVC website. We're running an ASP.NET WebAPI API at <a href="/api/">/api/</a> - but if you visit it in a normal web browser, you won't see much.
+</p>
+<p>
+    There's an API explorer tool included in the solution, which you can find at <a href="/explorer/">/explorer</a>
+</p>
+<p>Here's the API endpoints that are exposed in this version:</p>
+<ul>
+    @foreach (var uri in new[] {
+        "/profiles", "/profiles/superman", "/profiles/superman/friends", "/profiles/superman/photos"
+    }) {
+        <li>
+            /api@(uri) &bull; <a href="/explorer#/api@(uri)">explore</a> &bull; <a href="/api@(uri)">browse</a>
+        </li>
+    }
+</ul>
+<hr/>
+<p>
+    All the code and examples for the workshop are available on GitHub at <a href="https://www.github.com/dylanbeattie/SDP2017/">http://www.github.com/dylanbeattie/SDP2017/</a>
+</p>
+</body>
+</html>
