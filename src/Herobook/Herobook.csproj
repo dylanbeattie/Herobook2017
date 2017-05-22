@@ -165,10 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BrowserJsonFormatter.cs" />
-    <Compile Include="App_Start\Filters\AddChallengeOnUnauthorizedResult.cs" />
-    <Compile Include="App_Start\Filters\AuthenticationFailureResult.cs" />
-    <Compile Include="App_Start\Filters\BasicAuthenticationAttribute.cs" />
-    <Compile Include="App_Start\Filters\HttpAuthenticationChallengeContextExtensions.cs" />
     <Compile Include="App_Start\HttpConfigurationExtensions.cs" />
     <Compile Include="App_Start\Routing\ContentTypeRoute.cs" />
     <Compile Include="App_Start\Routing\ContentTypeConstraint.cs" />

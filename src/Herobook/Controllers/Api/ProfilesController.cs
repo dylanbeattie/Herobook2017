@@ -5,11 +5,11 @@ using System.Net.Http;
 using System.Web.Http;
 using Herobook.Data;
 using Herobook.Data.Entities;
-using Herobook.Filters;
+
 using Herobook.Hypermedia;
 
 namespace Herobook.Controllers.Api {
-    [WorkshopBasicAuthentication(Password = "workshop")]
+
     public class ProfilesController : ApiController {
         private readonly IDatabase db;
 
@@ -61,20 +61,17 @@ namespace Herobook.Controllers.Api {
             return Created(Url.Content($"~/api/profiles/{profile.Username}"), profile.ToResource());
         }
 
-        [Authorize]
         [Route("api/profiles/{username}")]
         [HttpPut]
         public object Put(string username, [FromBody] Profile profile) {
-            if (User.Identity.Name != username) return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"User '{User.Identity.Name}' does not have permission to update user '{username}'");
             var result = db.UpdateProfile(username, profile);
             return result.ToResource();
         }
 
-        [Authorize]
+
         [Route("api/profiles/{username}")]
         [HttpDelete]
         public object Delete(string username) {
-            if (User.Identity.Name != username) return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"User '{User.Identity.Name}' does not have permission to delete user '{username}'");
             db.DeleteProfile(username);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
