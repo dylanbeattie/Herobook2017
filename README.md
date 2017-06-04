@@ -1,2 +1,2 @@
-# SDP2017
-Code, workshops and slides from the Sela Developer Practise 2017
+# Real World REST workshop
+Code, workshops and slides from Dylan Beattie's Real World REST workshop
