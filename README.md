@@ -1,5 +1,4 @@
 # BUILDING HYPERMEDIA APIS WITH ASP.NET
-## Sela Developer Practise, Israel, 23-25 May 2017
 
 ## COURSE SUMMARY
 So you’ve built your HTTP API, and now that it’s live, you’re suddenly dealing with a whole new set of problems. Do you really need to PUT the entire Customer just to change someone’s email address? Why does it take you 25 API calls just to render a shopping cart? How do you find the bottlenecks when just drawing a web page requires fifty HTTP requests? What happens when one of your API consumers accidentally tries to GET your entire customer database? The architectural style known as REST can answer all these questions - and more - but even experienced developers often find it difficult to apply RESTful principles when building real-world applications. In this workshop, we’ll explore the elements of REST related to hypermedia and the principle of “hypermedia as the engine of application state” (HATEOAS) - we’ll talk about why they matter, what problems they solve, and when you might want to implement them in your own systems. During the workshop, we’ll implement a RESTful HTTP API using C# and ASP.NET. Starting with the most basic “hello world” service, we’ll cover patterns like content negotiation and resource expansion. We’ll compare several popular formats for representing hypermedia in modern web APIs, we’ll cover the semantics of PUT, POST and DELETE (and implement support for HTTP PATCH), and we’ll look at some of the tools and frameworks that are available to help you design, build and monitor your HTTP APIs. Finally, we’ll cover topics like monitoring and security, and we’ll discuss the strategic value of building HTTP APIs in modern organisations - so you’ll go home not just knowing how to build a great RESTful APIs, but also how to persuade your boss that it’s a good idea.
@@ -13,27 +12,7 @@ So you’ve built your HTTP API, and now that it’s live, you’re suddenly dea
 # WHAT’S NOT IN THIS COURSE:
 
 To cover the material in the available time, we will be focusing exclusively on building hypermedia APIs in C# using ASP.NET and WebAPI. We won’t be talking about VB.NET, F#, SQL, NoSQL, HTML, CSS or JavaScript. We’ll be using a couple of small JS apps during the demonstrations and hands-on sessions, and talking about integrating your APIs with other systems, but if you want learn about using AngularJS with Suave.IO and Entity Framework, this is not the workshop for you. 😊
- 
-# WORKSHOP PROGRAMME
 
-* 09:00   Introduction: Defining REST.
-* 09:20   Hypermedia as the Engine of Application State
-* 09:40   Resource decomposition
-* 10:00   Resource Expansion
-* 10:30   BREAK
-* 10:45   Representing Actions with Hypermedia
-* 11:15   Implementing HTTP PATCH
-* 11:55   Demo: Tools, Tips and Tricks
-* 12:15   LUNCH
-* 13:15   Content Negotiation
-* 13:35   Caching and Layering
-* 13:45   Security and Authentication
-* 14:15   API Versioning
-* 14:45   BREAK
-* 15:00   Testing and Monitoring APIs
-* 15:30   Discussion: API Strategy
-* 16:00   FINISH
- 
 # INTRODUCTION: DEFINING REST.
 
 # MODULE 1: HYPERMEDIA AS THE ENGINE OF APPLICATION STATE
@@ -46,6 +25,7 @@ To cover the material in the available time, we will be focusing exclusively on 
 ## DISCUSSION POINTS
 * Do linked resources have to be on the same server? 
 * How could you design a partition scheme that would split your user profile data across multiple database servers?
+
 # MODULE 2: RESOURCE DECOMPOSITION
 ## WORKSHOP
 * Modify the /profiles/{username} endpoint so that it converts the database response into a dynamic object. 
@@ -64,8 +44,6 @@ Take the time here to play around with some ideas for specifying multiple resour
 * Could you do inline expansion of resources that are hosted on a different server?
 * Could you separate the elements of the implementation, so that the resource expansion happened on a front-end caching server or load balancer?
 * Could you apply the ‘donut caching’ pattern to inline resource expansion?
-# BREAK
-* Question for the break: Could you build a hypermedia API using SMS text messaging?
  
 # MODULE 4: REPRESENTING ACTIONS WITH HYPERMEDIA
 ## WORKSHOP
@@ -85,14 +63,7 @@ Implement PATCH support for /profiles/{username}, with the following specificati
 * The PATCH action should be added to the _actions collection of the /profiles/{username} endpoint
 ## DISCUSSION POINTS
 * What would RMM level 3 look like for a PATCH operation? How would you communicate the required data fields and format to the API client?
-# DEMO: TOOLS, TIPS AND TRICKS
-## LINKS
-* Runscope: live monitoring and testing for HTTP APIs: https://www.runscope.com/
-* NGrok: secure tunnels to localhost: https://ngrok.com/
-* Postman: API development and testing: https://www.getpostman.com/ 
-## BREAK FOR LUNCH
 
- 
 # MODULE 6: CONTENT NEGOTIATION
 ## WORKSHOP
 Extend the /profiles/{username}/photos/{photoId} endpoint to support the following content types:
@@ -102,6 +73,7 @@ For image representations, pick your favourite superhero, find a cool picture of
 If the server does not have a suitable representation available, it should return an HTTP 406 Not Acceptable, and include in the response a set of available representations so that the client can decide whether to use an alternative representation.  
 ## DISCUSSION POINTS
 * In module 4, we talked about creating a POST method that could support both JSON and x-form submissions. How could you create generic HTTP actions – PUT, POST, DELETE – that support content negotiation?
+
 # MODULE 7: CACHING AND LAYERING
 ## WORKSHOP
 Extend GET /profiles/username endpoint to support HTTP If-Modified-Since and If-None-Match headers, and to return HTTP 304 Not Modified if the client already has an up-to-date version of the resource.
@@ -123,6 +95,7 @@ Use either of the RESTful methods of API versioning we described in the demo for
 ## DISCUSSION POINTS
 * How would you use hypermedia to communicate to API clients that a newer version of the API is available?
 * How would you 
+
 # TESTING AND MONITORING APIS
 ## WORKSHOP
 Add a /status endpoint to your API, that returns a JSON document showing:
