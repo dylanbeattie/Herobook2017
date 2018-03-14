@@ -6,7 +6,8 @@ using Herobook.Data.Entities;
 using Herobook.Hypermedia;
 
 namespace Herobook.Controllers.Api {
-    public class StatusesController {
+    public class StatusesController : ApiController
+    {
         private readonly DemoDatabase db;
 
         public StatusesController() {
