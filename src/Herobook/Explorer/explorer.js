@@ -141,9 +141,12 @@ function getCookie(key) {
         var headers = $("#headers-textarea").val().split(/[\r\n]+/g);
         var result = {};
         for (var i = 0; i < headers.length; i++) {
-            var tokens = headers[i].split(/:/);
-            if (tokens && tokens.length > 1) {
-                result[tokens[0].trim()] = tokens[1].trim();
+            var rawHeader = headers[i];
+            var split = rawHeader.indexOf(':');
+            var headerName = rawHeader.slice(0, split).trim();
+            var headerValue = rawHeader.slice(split + 1).trim();
+            if (headerName && headerValue) {
+                result[headerName] = headerValue;
             }
         }
         return (result);
